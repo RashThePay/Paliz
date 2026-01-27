@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # یا master - هر کدوم branch اصلیته
+      - master  # یا master - هر کدوم branch اصلیته
   workflow_dispatch:  # اجازه manual trigger
 
 # مجوزها برای deploy به GitHub Pages
