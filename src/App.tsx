@@ -31,7 +31,7 @@ function App() {
   }, [setUser])
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Paliz">
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route
