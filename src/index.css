@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url(./assets/Vazirmatn[wght].woff2);
+}
+
+@layer base {
+  body {
+    font-family: 'Vazirmatn', Tahoma, Geneva, Verdana, sans-serif;
+    direction: rtl;
+  }
+}
