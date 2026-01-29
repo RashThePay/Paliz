@@ -19,16 +19,16 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
   return (
     <Link
       to={`/transaction/${transaction.id}`}
-      className="block bg-white rounded-lg shadow-sm p-4 hover:shadow-md transition mb-3"
+      className="block bg-gray-800 rounded-lg shadow-sm p-4 hover:shadow-md transition mb-3"
     >
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center gap-2">
           <span className="text-2xl">{getTransactionIcon()}</span>
           <div>
-            <h3 className="font-semibold text-gray-800">
+            <h3 className="font-semibold text-gray-100">
               {transaction.customer?.name || 'بدون نام'}
             </h3>
-            <p className="text-sm text-gray-500">{transaction.transaction_date}</p>
+            <p className="text-sm text-gray-400">{transaction.transaction_date}</p>
           </div>
         </div>
         <StatusBadge transaction={transaction} />
@@ -36,33 +36,33 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
 
       <div className="flex justify-between items-center text-sm">
         <div>
-          <span className="text-gray-600">مبلغ: </span>
+          <span className="text-gray-300">مقدار: </span>
           <span className="font-semibold">
             {formatNumber(transaction.amount)} {transaction.currency}
           </span>
         </div>
         <div>
-          <span className="text-gray-600">نرخ: </span>
-          <span className="font-semibold">{formatNumber(transaction.rate)}</span>
+          <span className="text-gray-300">نرخ: </span>
+          <span className="font-semibold">{transaction.rate ? formatNumber(transaction.rate) : "؟"}</span>
         </div>
       </div>
 
       <div className="mt-2 flex justify-between items-center">
         <div className="text-sm">
-          <span className="text-gray-600">کل: </span>
+          <span className="text-gray-300">کل: </span>
           <span className="font-bold text-blue-600">
             {formatNumber(transaction.total_value || 0)} تومان
           </span>
         </div>
         {transaction.amount_remaining! > 0 && (
-          <div className="text-sm text-red-600">
+          <div className="text-sm text-red-500">
             مانده: {formatNumber(transaction.amount_remaining!)} تومان
           </div>
         )}
       </div>
 
       {transaction.description && (
-        <p className="mt-2 text-sm text-gray-600 line-clamp-1">
+        <p className="mt-2 text-sm text-gray-300 line-clamp-1">
           {transaction.description}
         </p>
       )}
@@ -75,7 +75,7 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
             readOnly
             className="rounded"
           />
-          <span className="text-gray-600">تحویل کالا</span>
+          <span className="text-gray-300">تحویل کالا</span>
         </div>
         <div className="flex items-center gap-1">
           <input
@@ -84,11 +84,11 @@ export function TransactionCard({ transaction }: TransactionCardProps) {
             readOnly
             className="rounded"
           />
-          <span className="text-gray-600">دریافت پول</span>
+          <span className="text-gray-300">دریافت پول</span>
         </div>
       </div>
 
-      <ChevronLeft className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+      <ChevronLeft className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={20} />
     </Link>
   )
 }

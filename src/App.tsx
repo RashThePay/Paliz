@@ -6,6 +6,9 @@ import { Login } from './pages/Login'
 import { Dashboard } from './pages/Dashboard'
 import { TransactionDetail } from './pages/TransactionDetail'
 import { Customers } from './pages/Customers'
+import { CustomerDetail } from './pages/CustomerDetail'
+import { Calendar } from './pages/Calendar'
+import { Balances } from './pages/Balances'
 import { TransactionForm } from './components/TransactionForm'
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
@@ -17,12 +20,10 @@ function App() {
   const setUser = useStore((state) => state.setUser)
 
   useEffect(() => {
-    // بررسی session فعلی
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
     })
 
-    // گوش دادن به تغییرات auth
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
     })
@@ -31,7 +32,7 @@ function App() {
   }, [setUser])
 
   return (
-    <BrowserRouter basename="/Paliz">
+    <BrowserRouter basename='/Paliz'>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route
@@ -39,6 +40,14 @@ function App() {
           element={
             <PrivateRoute>
               <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/calendar"
+          element={
+            <PrivateRoute>
+              <Calendar />
             </PrivateRoute>
           }
         />
@@ -55,6 +64,22 @@ function App() {
           element={
             <PrivateRoute>
               <Customers />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/customer/:id"
+          element={
+            <PrivateRoute>
+              <CustomerDetail />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/balances"
+          element={
+            <PrivateRoute>
+              <Balances />
             </PrivateRoute>
           }
         />

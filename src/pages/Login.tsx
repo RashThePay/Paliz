@@ -63,13 +63,13 @@ export function Login() {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
+      <div className="bg-gray-800 rounded-2xl shadow-2xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
           <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
             <LogIn className="text-blue-600" size={32} />
           </div>
-          <h1 className="text-2xl font-bold text-gray-800">مدیریت معاملات</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-2xl font-bold text-gray-100">مدیریت معاملات</h1>
+          <p className="text-gray-300 mt-2">
             {isSignUp ? 'ایجاد حساب کاربری' : 'ورود به حساب کاربری'}
           </p>
         </div>
@@ -82,16 +82,16 @@ export function Login() {
 
         <form onSubmit={handleAuth} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-200 mb-2">
               ایمیل
             </label>
             <div className="relative">
-              <Mail className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              <Mail className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300" size={20} />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pr-10 pl-4 py-3 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="your@email.com"
                 required
                 dir="ltr"
@@ -100,16 +100,16 @@ export function Login() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-200 mb-2">
               رمز عبور
             </label>
             <div className="relative">
-              <Lock className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              <Lock className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300" size={20} />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pr-10 pl-4 py-3 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="••••••••"
                 required
                 dir="ltr"
@@ -120,7 +120,7 @@ export function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-blue-600 text-gray-900 py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'در حال پردازش...' : isSignUp ? 'ثبت نام' : 'ورود'}
           </button>
