@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { useStore } from '../store/useStore'
 import { TransactionCard } from '../components/TransactionCard'
 import { Layout } from '../components/Layout'
-import { Search, Filter, TrendingUp, TrendingDown, DollarSign, Wallet, AlertCircle } from 'lucide-react'
+import { Search, Filter, TrendingUp, TrendingDown, DollarSign, AlertCircle } from 'lucide-react'
 
 export function Dashboard() {
-  const { transactions, balances, fetchTransactions, fetchBalances, fetchCurrencies, loading } = useStore()
+  const { transactions, fetchTransactions, fetchBalances, fetchCurrencies, loading } = useStore()
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState<'all' | 'completed' | 'conditional' | 'incomplete'>('all')
 

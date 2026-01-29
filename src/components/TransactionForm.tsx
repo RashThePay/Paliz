@@ -20,7 +20,19 @@ export function TransactionForm() {
     useEffect(() => {
         fetchCurrencies()
     }, [fetchCurrencies])
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<{
+    customer_id: string;
+    transaction_date: string;
+    transaction_type: "sell" | "buy" | "manual" | "loan";
+    transaction_status: "incomplete" | "conditional" | "completed";
+    amount: string;
+    currency: string;
+    rate: string;
+    total?: string;
+    goods_delivered: boolean;
+    payment_received: boolean;
+    description: string;
+}>({
         customer_id: '',
         transaction_date: new Date().toLocaleDateString('fa-IR', {
             year: 'numeric',
@@ -32,7 +44,7 @@ export function TransactionForm() {
         amount: '',
         currency: 'دلار',
         rate: '',
-        total: '',
+        total: undefined,
         goods_delivered: false,
         payment_received: false,
         description: ''
@@ -64,7 +76,7 @@ export function TransactionForm() {
     const getCalculatedValues = () => {
         const amount = parseFloat(formData.amount) || 0
         const rate = parseFloat(formData.rate) || 0
-        const total = parseFloat(formData.total) || 0
+        const total = parseFloat(formData.total || "0") || 0
 
         const amountFilled = formData.amount !== ''
         const rateFilled = formData.rate !== ''
@@ -160,7 +172,7 @@ export function TransactionForm() {
             alert('برای معاملات شرطی، نرخ قابل تنظیم نیست')
             return
         }
-
+        delete formData.total
         setLoadingTransaction(true)
         try {
             await addTransaction({
@@ -363,12 +375,12 @@ export function TransactionForm() {
 
                         {/* خلاصه محاسبات */}
                         {displayValues.amount && displayValues.rate && formData.transaction_status !== 'conditional' && (
-                            <div className="bg-blue-900/30 border border-blue-800 p-3 rounded-lg" style={{backgroundColor:(parseFloat(displayValues.amount) * parseFloat(displayValues.rate) == parseFloat(displayValues.total)) ? 'unset': 'rgba(255,0,0,0.1)'}}>
+                            <div className="bg-blue-900/30 border border-blue-800 p-3 rounded-lg" style={{backgroundColor:(parseFloat(displayValues.amount) * parseFloat(displayValues.rate) == parseFloat(displayValues.total || "0")) ? 'unset': 'rgba(255,0,0,0.1)'}}>
                                 <div className="text-sm text-blue-200">
                                     <span className="font-semibold">{new Intl.NumberFormat('fa-IR').format(parseFloat(displayValues.amount))}</span> {formData.currency} ×{' '}
                                     <span className="font-semibold">{new Intl.NumberFormat('fa-IR').format(parseFloat(displayValues.rate) || 0)}</span> تومان = {' '}
                                     <span className="font-bold text-blue-300">
-                                        {new Intl.NumberFormat('fa-IR').format(parseFloat(displayValues.total) || 0)}
+                                        {new Intl.NumberFormat('fa-IR').format(parseFloat(displayValues.total || "0") || 0)}
                                     </span> تومان
                                 </div>
                             </div>
